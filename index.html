@@ -14,17 +14,41 @@
 
 	<link rel="stylesheet" href="./assets/css/style.css">
 </head>
+<body style="display: flex; align-items: center; justify-content: center; position: relative; width: 100%; height: 100vh; margin: 0;">
 
-<button id="myButton">My button</button>
-<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
-<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<button class="initTooltip" data-content="Nội dung không bao gồm code html" id="tooltip-1"
+		style="position: absolute; top: 15px; left: 30px;">
+	Button 01
+</button>
 
-<script>
-	// With the above scripts loaded, you can call `tippy()` with a CSS
-	// selector and a `content` prop:
-	tippy('#myButton', {
-		content: 'My tooltip!',
-	});
-</script>
+<button class="initTooltip" data-content="Nội dung <b><i><u>bao gồm code html</u></i></b>" id="tooltip-2">
+	Button 02
+</button>
+
+<button class="initTooltip" data-content="" data-template="template-demo-01" id="tooltip-3"
+		style="position: absolute; top: 15px; right: 30px;">
+	Button 03
+</button>
+
+<div id="template-demo-01" style="display:none;">
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <b>In, incidunt.</b></p>
+	<p>Lorem ipsum dolor sit amet, <span style="color: red">consectetur adipisicing elit</span>. In, incidunt.</p>
+	<p style="font-size: 20px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, incidunt.</p>
+</div>
+
+<button class="initTooltip" data-content="Nội dung không bao gồm code html" id="tooltip-4"
+		style="position: absolute; bottom: 15px; left: 30px;">
+	Button 04
+</button>
+
+<button class="initTooltip" data-content="Nội dung <b><i><u>bao gồm code html</u></i></b>" id="tooltip-5"
+		style="position: absolute; bottom: 15px; right: 30px;">
+	Button 05
+</button>
+
+
+<script src="./assets/js/popper.min.js"></script>
+<script src="./assets/js/tippy-bundle.min.js"></script>
+<script src="./assets/js/app.js"></script>
 </body>
 </html>
