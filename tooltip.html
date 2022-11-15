@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Template Tooltip</title>
+	<meta name="description" content="Template Money Gain">
+	<meta name="author" content="">
+
+	<meta property="og:title" content="Template Money Gain">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="">
+	<meta property="og:description" content="Template Money Gain">
+	<meta property="og:image" content="">
+
+	<link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+<button class="initTooltip" data-content="Nội dung cần hiển thị">My button</button>
+<button class="initTooltip" data-content="Nội dung cần hiển thị <b>bao gồm code html</b>">My button</button>
+<button class="initTooltip" data-content="Nội dung cần hiển thị">My button</button>
+<button class="initTooltip" data-content="Nội dung cần hiển thị <b>bao gồm code html</b>">My button</button>
+
+<script>
+
+	const tooltips = document.querySelectorAll('.initTooltip');
+	if (tooltips.length > 0) {
+		let screenWidth = window.innerWidth;
+		let screenHeight = window.innerHeight;
+
+		window.onresize = () => {
+			screenWidth = window.innerWidth;
+			screenHeight = window.innerHeight;
+		};
+
+		tooltips.forEach((tooltip) => {
+			tooltip.addEventListener('mouseenter', (event) => {
+				let tooltip = {
+					elm: event.target,
+					content: event.target.getAttribute('data-content'),
+					clientX: event.clientX,
+					clientY: event.clientY,
+					position: event.target.getBoundingClientRect()
+				}
+				handlePositionElement(tooltip.position);
+				document.body.insertAdjacentHTML('beforeend', templateTooltip(tooltip.content));
+			});
+
+			tooltip.addEventListener('mouseleave', (event) => {
+				let template_tooltip = document.getElementsByClassName('template-tooltip');
+				template_tooltip[0].remove();
+			});
+		});
+
+		let templateTooltip = (content) => `<div class="template-tooltip">
+											<div class="template-tooltip_inner">
+												<div class="template-tooltip-arrow"></div>
+												<div class="template-inner">${content}</div>
+											</div>
+										</div>`;
+
+		let handlePositionElement = (position) => {
+			console.log(position.top / screenHeight);
+			if (position.top / screenHeight < 0.5) {
+
+			}
+		}
+	}
+</script>
+</body>
+</html>

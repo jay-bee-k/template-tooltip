@@ -1,8 +1,47 @@
 .tippy-box {
-	background-color: #e3d76c !important;
-	color: #232323;
+    background-color: #e3d76c !important;
+    color: #232323;
 }
 
 .tippy-box .tippy-arrow {
-	color: #e3d76c !important;
+    color: #e3d76c !important;
+}
+
+.template-tooltip {
+    position: absolute;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s opacity ease-in-out, .3s visibility ease-in-out;
+}
+
+.template-tooltip.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.template-tooltip .template-tooltip_inner {
+    position: relative;
+    padding: 5px 9px;
+    z-index: 1;
+    background: #FFF5CF;
+    border: 1px solid #cbba79;
+    color: #121212;
+    border-radius: 5px;
+    min-width: 150px;
+    max-width: 768px;
+}
+
+.template-tooltip .template-tooltip_inner .template-tooltip_arrow {
+    height: 16px;
+    width: 16px;
+    color: #FFF5CF;
+    position: absolute;
+}
+
+.template-tooltip .template-tooltip_inner .template-tooltip_arrow:before {
+    border-color: transparent;
+    border-style: solid;
+    content: "";
+    position: absolute;
 }
