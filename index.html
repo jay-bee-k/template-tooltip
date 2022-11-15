@@ -25,8 +25,37 @@
 	Button 02
 </button>
 
+<button class="initTooltip" data-content="" data-template="template-demo-hdsd" id="tooltip-demo"
+		style="margin-left: 10px; background: red; color: #fff; border: 1px solid red;">
+	Hướng dẫn sử dụng
+</button>
+
+<div id="template-demo-hdsd" style="display: none">
+	<ul>
+		<li>
+			Sử dụng class <b>"initTooltip"</b> vào bất kì thẻ html khi muốn di chuột vào để hiển thị thông báo
+		</li>
+		<li>
+			Các attribute bên dưới sẽ được khai báo vào các thẻ html có sử dụng class <b>"initTooltip"</b>
+		</li>
+		<li>
+			Attribute <b>"data-content"</b>: truyền vào nội dung thông báo (ngắn thôi, nếu dài quá thì xem tiếp attribute bên dưới)
+		</li>
+		<li>
+			Attribute <b>"data-template"</b>: truyền vào id của html chứa thông báo (Lưu ý: <b style="color: red">ở attribute "data-content" bắt buộc không được truyền bất kì dữ liệu vào</b>)
+		</li>
+		<li>
+			HTML chứa thông báo: <b style="color: red">phải có id trùng với giá trị đã truyền vào data-template</b>, đồng thời phải thêm <b style="color: red">style="display: none"</b> vào chính html đó.
+		</li>
+		<li>
+			Các style được viết trong button demo, không cần phải lấy theo
+		</li>
+	</ul>
+</div>
+
+
 <button class="initTooltip" data-content="" data-template="template-demo-01" id="tooltip-3"
-		style="position: absolute; top: 15px; right: 30px;">
+		style="position: absolute; top: 15px; right: 30px">
 	Button 03
 </button>
 
