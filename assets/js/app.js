@@ -1,21 +1,62 @@
-let tooltips = document.getElementsByClassName('initTooltip');
+
+
+const tooltips = document.querySelectorAll('.initTooltip');
 if (tooltips.length > 0) {
-	let index = 0;
-	for (index; index < tooltips.length; index++) {
+	let screenWidth = window.innerWidth;
+	let screenHeight = window.innerHeight;
 
-		let tooltip_id = '#' + tooltips[index].getAttribute('id');
-		let tooltip_content = tooltips[index].getAttribute('data-content');
-		let tooltip_template = document.getElementById(tooltips[index].getAttribute('data-template'));
+	window.onresize = () => {
+		screenWidth = window.innerWidth;
+		screenHeight = window.innerHeight;
+	};
 
-		if (tooltip_content.length === 0 && tooltip_template !== undefined) {
-			tooltip_content = tooltip_template;
-			tooltip_content.style.display = "block";
+	tooltips.forEach((tooltip) => {
+		tooltip.addEventListener('mouseenter', (event) => {
+			let tooltip = {
+				elm: event.target,
+				content: event.target.getAttribute('data-content'),
+				position: event.target.getBoundingClientRect()
+			}
+
+			let template_tooltip = document.getElementsByClassName('template-tooltip');
+
+			document.body.insertAdjacentHTML('beforeend', templateTooltip(tooltip.content));
+			template_tooltip[0].classList.add('show');
+			handlePositionElement(tooltip.position, tooltip.elm, template_tooltip);
+		});
+
+		tooltip.addEventListener('mouseleave', (event) => {
+			document.getElementsByClassName('template-tooltip')[0].remove();
+		});
+	});
+
+	let templateTooltip = (content) => `<div class="template-tooltip">
+											<div class="template-tooltip_inner">
+												<div class="template-tooltip_arrow"></div>
+												<div class="template-tooltip_content">${content}</div>
+											</div>
+										</div>`;
+
+	let handlePositionElement = (position, elm, template_tooltip) => {
+		let ratioPositionY = position.top / screenHeight,
+			ratioPositionX = position.left / screenWidth,
+			elmHeight = elm.offsetHeight,
+			styleY = 'top:' + (position.top - elmHeight - 20) + 'px;',
+			styleX = 'left:' + position.left + 'px;';
+
+		template_tooltip[0].setAttribute('data-placement-y', 'top');
+		template_tooltip[0].setAttribute('data-placement-x', 'left');
+
+		if (ratioPositionY <= 0.115) {
+			template_tooltip[0].setAttribute('data-placement-y', 'bottom');
+			styleY = 'top:' + (position.top + elmHeight + 12) + 'px;';
 		}
 
-		tippy(tooltip_id, {
-			content: tooltip_content,
-			interactive: true,
-			allowHTML: true,
-		});
+		if (ratioPositionX > ((screenWidth > 992) ? 0.8 : 0.5)) {
+			template_tooltip[0].setAttribute('data-placement-x', 'right');
+			styleX = 'right:' + (screenWidth - position.right) + 'px;';
+		}
+
+		template_tooltip[0].style.cssText = styleX + styleY;
 	}
 }

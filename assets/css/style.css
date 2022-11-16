@@ -1,12 +1,3 @@
-.tippy-box {
-	background-color: #e3d76c !important;
-	color: #232323;
-}
-
-.tippy-box .tippy-arrow {
-	color: #e3d76c !important;
-}
-
 .template-tooltip {
 	position: fixed;
 	z-index: 9999;
