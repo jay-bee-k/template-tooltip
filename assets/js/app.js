@@ -1,9 +1,7 @@
-
-
 const tooltips = document.querySelectorAll('.initTooltip');
 if (tooltips.length > 0) {
-	let screenWidth = window.innerWidth;
-	let screenHeight = window.innerHeight;
+	let screenWidth = window.innerWidth,
+		screenHeight = window.innerHeight;
 
 	window.onresize = () => {
 		screenWidth = window.innerWidth;
@@ -23,12 +21,11 @@ if (tooltips.length > 0) {
 			document.body.insertAdjacentHTML('beforeend', templateTooltip(tooltip.content));
 			template_tooltip[0].classList.add('show');
 			handlePositionElement(tooltip.position, tooltip.elm, template_tooltip);
-		});
-
-		tooltip.addEventListener('mouseleave', (event) => {
-			document.getElementsByClassName('template-tooltip')[0].remove();
+			let tooltipElm = document.getElementsByClassName('template-tooltip');
+			handleMouseMoveTooltip(tooltipElm, tooltip.elm)
 		});
 	});
+
 
 	let templateTooltip = (content) => `<div class="template-tooltip">
 											<div class="template-tooltip_inner">
@@ -58,5 +55,37 @@ if (tooltips.length > 0) {
 		}
 
 		template_tooltip[0].style.cssText = styleX + styleY;
+	}
+
+
+	const handleMouseMoveTooltip = function (elm, target) {
+		let isContainsElm = false,
+			isContainsTarget = false;
+		document.addEventListener('mousemove', (event) => {
+			if (elm.length > 0) {
+
+				// if (target.contains(event.target)) {
+				// 	isContainsTarget = true;
+				// }
+				//
+				// if (elm[0].contains(event.target)) {
+				// 	isContainsElm = true;
+				// }
+				//
+				// console.log(isContainsTarget, isContainsElm);
+				//
+				// if (isContainsTarget === true && isContainsElm === false) {
+				// 	return false;
+				// } else if (isContainsTarget === false && isContainsElm === true) {
+				// 	return false;
+				// } else if (isContainsTarget === false && isContainsElm === false) {
+				// 	elm[0].remove();
+				// }
+
+				if (!target.contains(event.target) && !elm[0].contains(event.target)) {
+					elm[0].remove();
+				}
+			}
+		});
 	}
 }
